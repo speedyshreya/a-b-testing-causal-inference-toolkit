@@ -11,7 +11,7 @@ python scaffold.py
 ## Steps
 
 - [x] **1.** standard_normal_cdf
-- [ ] **2.** standard_normal_ppf
+- [x] **2.** standard_normal_ppf
 - [ ] **3.** pooled_proportion
 - [ ] **4.** pooled_standard_error
 - [ ] **5.** two_proportion_z_statistic

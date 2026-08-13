@@ -20,8 +20,20 @@ def standard_normal_cdf(z):
     return 0.5*(1+erf(z/root_two))
     pass
 
-# Step 2 - standard_normal_ppf (not yet solved)
-# TODO: implement
+# Step 2 - standard_normal_ppf
+import math
+from scipy.special import erfinv
+
+def standard_normal_ppf(p):
+    """Return z such that Phi(z) = p for p in (0, 1)."""
+    # TODO: implement a rational approximation to the inverse standard normal CDF
+    root_two = math.sqrt(2)
+    if np.isscalar(p):
+        return root_two * erfinv(2*p - 1)
+    
+    p = np.asarray(p, dtype=float)
+    return root_two * erfinv(2*p - 1)
+    pass
 
 # Step 3 - pooled_proportion (not yet solved)
 # TODO: implement
