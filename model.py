@@ -41,8 +41,20 @@ def pooled_proportion(successes_a, total_a, successes_b, total_b):
     return ((successes_a+successes_b)/(total_a+total_b))
     pass
 
-# Step 4 - pooled_standard_error (not yet solved)
-# TODO: implement
+# Step 4 - pooled_standard_error
+import math
+
+def pooled_standard_error(pooled_p, total_a, total_b):
+    """Standard error of the difference in two proportions under the pooled null."""
+    # TODO: compute sqrt( p*(1-p) * (1/n_a + 1/n_b) ) using the pooled proportion.
+
+    individual_wobble_a = (1-pooled_p)*pooled_p/total_a
+    individual_wobble_b = (1-pooled_p)*pooled_p/total_b 
+
+    difference_wobble = individual_wobble_a + individual_wobble_b
+    return math.sqrt(difference_wobble)
+
+    pass
 
 # Step 5 - two_proportion_z_statistic (not yet solved)
 # TODO: implement
