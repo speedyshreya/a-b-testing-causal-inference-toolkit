@@ -69,8 +69,18 @@ def two_sided_p_value(z):
     return 2*one_tail
     pass
 
-# Step 7 - unpooled_standard_error (not yet solved)
-# TODO: implement
+# Step 7 - unpooled_standard_error
+def unpooled_standard_error(successes_a, total_a, successes_b, total_b):
+    # TODO: return the unpooled SE of the difference between two sample proportions.
+    p_A = successes_a/total_a
+    p_B = successes_b/total_b 
+
+    var_A = p_A*(1-p_A)/total_a
+    var_B = p_B*(1-p_B)/total_b
+
+    SE = math.sqrt(var_A+var_B)
+    return SE
+    pass
 
 # Step 8 - confidence_interval_from_se (not yet solved)
 # TODO: implement
