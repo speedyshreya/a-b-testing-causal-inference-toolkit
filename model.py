@@ -56,8 +56,11 @@ def pooled_standard_error(pooled_p, total_a, total_b):
 
     pass
 
-# Step 5 - two_proportion_z_statistic (not yet solved)
-# TODO: implement
+# Step 5 - two_proportion_z_statistic
+def two_proportion_z_statistic(p_a, p_b, pooled_se):
+    # TODO: return the z-statistic for a two-proportion test using p_b - p_a and pooled_se
+    return (p_b - p_a)/pooled_se
+    pass
 
 # Step 6 - two_sided_p_value (not yet solved)
 # TODO: implement
