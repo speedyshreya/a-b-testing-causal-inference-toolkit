@@ -82,8 +82,13 @@ def unpooled_standard_error(successes_a, total_a, successes_b, total_b):
     return SE
     pass
 
-# Step 8 - confidence_interval_from_se (not yet solved)
-# TODO: implement
+# Step 8 - confidence_interval_from_se
+def confidence_interval_from_se(point_estimate, standard_error, confidence_level):
+    # TODO: build a two-sided normal-approximation CI (lower, upper) from estimate and SE
+    alpha = 1 - confidence_level
+    z_star = standard_normal_ppf(1-alpha/2)
+    margin = z_star * standard_error
+    return (point_estimate-margin, point_estimate+margin)
 
 # Step 9 - required_sample_size_per_variant (not yet solved)
 # TODO: implement
