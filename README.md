@@ -15,7 +15,7 @@ python scaffold.py
 - [x] **3.** pooled_proportion
 - [x] **4.** pooled_standard_error
 - [x] **5.** two_proportion_z_statistic
-- [ ] **6.** two_sided_p_value
+- [x] **6.** two_sided_p_value
 - [ ] **7.** unpooled_standard_error
 - [ ] **8.** confidence_interval_from_se
 - [ ] **9.** required_sample_size_per_variant
