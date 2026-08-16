@@ -18,7 +18,7 @@ python scaffold.py
 - [x] **6.** two_sided_p_value
 - [x] **7.** unpooled_standard_error
 - [x] **8.** confidence_interval_from_se
-- [ ] **9.** required_sample_size_per_variant
+- [x] **9.** required_sample_size_per_variant
 - [ ] **10.** statistical_power
 - [ ] **11.** chi_square_statistic
 - [ ] **12.** sample_ratio_mismatch_check

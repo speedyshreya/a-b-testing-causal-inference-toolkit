@@ -90,8 +90,28 @@ def confidence_interval_from_se(point_estimate, standard_error, confidence_level
     margin = z_star * standard_error
     return (point_estimate-margin, point_estimate+margin)
 
-# Step 9 - required_sample_size_per_variant (not yet solved)
-# TODO: implement
+# Step 9 - required_sample_size_per_variant
+import math
+
+def required_sample_size_per_variant(baseline_rate, minimum_detectable_effect, alpha, power):
+    #min samples needed per variant for a two-proportion z-test to detect an absolute lift 
+    # above baseline rate at a significant level alpha, and "target"???
+
+    p1 = baseline_rate
+    p2 = baseline_rate + minimum_detectable_effect
+
+    # Two critical z-values (two-sided test for alpha)
+    z_alpha = standard_normal_ppf(1 - alpha / 2)
+    z_power = standard_normal_ppf(power)
+
+    # Pooled proportion under the null (equal group sizes, so it's the average)
+    p_bar = (p1 + p2) / 2
+
+    null_term = z_alpha * math.sqrt(2 * p_bar * (1 - p_bar))
+    alt_term  = z_power * math.sqrt(p1 * (1 - p1) + p2 * (1 - p2))
+
+    n = (null_term + alt_term) ** 2 / (p2 - p1) ** 2
+    return math.ceil(n)
 
 # Step 10 - statistical_power (not yet solved)
 # TODO: implement
