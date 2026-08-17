@@ -113,8 +113,24 @@ def required_sample_size_per_variant(baseline_rate, minimum_detectable_effect, a
     n = (null_term + alt_term) ** 2 / (p2 - p1) ** 2
     return math.ceil(n)
 
-# Step 10 - statistical_power (not yet solved)
-# TODO: implement
+# Step 10 - statistical_power
+import math
+
+def statistical_power(sample_size_per_variant, baseline_rate, effect_size, alpha):
+    n = sample_size_per_variant
+    p1 = baseline_rate
+    p2 = p1 + effect_size
+
+    p_bar = (p1 + p2) / 2
+    se_null = math.sqrt(2 * p_bar * (1 - p_bar) / n)
+    se_alt  = math.sqrt(p1 * (1 - p1) / n + p2 * (1 - p2) / n)
+
+    z_alpha = standard_normal_ppf(1 - alpha / 2)
+    threshold = z_alpha * se_null
+
+    z = (abs(effect_size) - threshold) / se_alt
+    power = standard_normal_cdf(z)
+    return power
 
 # Step 11 - chi_square_statistic (not yet solved)
 # TODO: implement
