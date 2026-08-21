@@ -143,8 +143,30 @@ def chi_square_statistic(observed_counts, expected_counts):
     
     return total
 
-# Step 12 - sample_ratio_mismatch_check (not yet solved)
-# TODO: implement
+# Step 12 - sample_ratio_mismatch_check
+import math
+import numpy as np
+
+def sample_ratio_mismatch_check(observed_counts, expected_ratios, alpha):
+    # total number of people in the experiment
+    total_count = sum(observed_counts)
+
+    expected_counts = [total_count*r for r in expected_ratios]
+
+    chi_square = chi_square_statistic(observed_counts, expected_counts)
+
+    #chi_square = z^2 then z = sqrt(chi_square)
+
+    z = math.sqrt(chi_square)
+    p_value = 2* (1-standard_normal_cdf(z))
+
+    srm_detected = p_value < alpha
+
+    return {
+    'chi_square': chi_square,
+    'p_value': p_value,
+    'srm_detected': srm_detected,   
+    }
 
 # Step 13 - bonferroni_correction (not yet solved)
 # TODO: implement

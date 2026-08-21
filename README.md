@@ -21,7 +21,7 @@ python scaffold.py
 - [x] **9.** required_sample_size_per_variant
 - [x] **10.** statistical_power
 - [x] **11.** chi_square_statistic
-- [ ] **12.** sample_ratio_mismatch_check
+- [x] **12.** sample_ratio_mismatch_check
 - [ ] **13.** bonferroni_correction
 - [ ] **14.** benjamini_hochberg_correction
 - [ ] **15.** group_mean_change
