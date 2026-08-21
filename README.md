@@ -20,7 +20,7 @@ python scaffold.py
 - [x] **8.** confidence_interval_from_se
 - [x] **9.** required_sample_size_per_variant
 - [x] **10.** statistical_power
-- [ ] **11.** chi_square_statistic
+- [x] **11.** chi_square_statistic
 - [ ] **12.** sample_ratio_mismatch_check
 - [ ] **13.** bonferroni_correction
 - [ ] **14.** benjamini_hochberg_correction
