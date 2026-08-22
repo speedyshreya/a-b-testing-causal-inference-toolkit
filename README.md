@@ -22,7 +22,7 @@ python scaffold.py
 - [x] **10.** statistical_power
 - [x] **11.** chi_square_statistic
 - [x] **12.** sample_ratio_mismatch_check
-- [ ] **13.** bonferroni_correction
+- [x] **13.** bonferroni_correction
 - [ ] **14.** benjamini_hochberg_correction
 - [ ] **15.** group_mean_change
 - [ ] **16.** difference_in_differences_simple

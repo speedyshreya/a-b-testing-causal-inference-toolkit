@@ -168,8 +168,15 @@ def sample_ratio_mismatch_check(observed_counts, expected_ratios, alpha):
     'srm_detected': srm_detected,   
     }
 
-# Step 13 - bonferroni_correction (not yet solved)
-# TODO: implement
+# Step 13 - bonferroni_correction
+import numpy as np
+
+def bonferroni_correction(p_values, alpha):
+    p = np.asarray(p_values, dtype=float)
+    n = len(p)
+    if n == 0:
+        return np.zeros(0, dtype=bool)      # empty boolean array
+    return p < alpha / n
 
 # Step 14 - benjamini_hochberg_correction (not yet solved)
 # TODO: implement
