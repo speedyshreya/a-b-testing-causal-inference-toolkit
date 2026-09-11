@@ -178,8 +178,37 @@ def bonferroni_correction(p_values, alpha):
         return np.zeros(0, dtype=bool)      # empty boolean array
     return p < alpha / n
 
-# Step 14 - benjamini_hochberg_correction (not yet solved)
-# TODO: implement
+# Step 14 - benjamini_hochberg_correction
+import numpy as np
+
+def benjamini_hochberg_correction(p_values, alpha):
+    """Return a boolean array marking BH-significant hypotheses at level alpha."""
+
+    p_values_sorted = sorted(enumerate(p_values), key=lambda x: x[1])
+    indices = [i for i, p in p_values_sorted]
+    rank = [i+1 for i in range(len(p_values))]
+    sorted_p = [p for i,p in p_values_sorted]
+
+    
+
+    # n = hypotheses count total
+    # alpha*n is the fraction that will lie below that alpha count
+
+    n = len(p_values)
+    ans = np.zeros(n, dtype=bool)
+
+    bars = [rank[i]*alpha/n for i in range(len(p_values))]
+
+    k = -1
+
+    for i, p_val in enumerate(sorted_p):
+        if p_val <= bars[i]:
+            k = i
+    
+    for i in range(k+1):
+        ans[indices[i]] = True
+
+    return ans
 
 # Step 15 - group_mean_change (not yet solved)
 # TODO: implement
