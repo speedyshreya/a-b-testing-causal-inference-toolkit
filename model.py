@@ -226,8 +226,19 @@ def difference_in_differences_simple(treated_pre, treated_post, control_pre, con
 
     return change_treated - change_controlled
 
-# Step 17 - build_did_design_matrix (not yet solved)
-# TODO: implement
+# Step 17 - build_did_design_matrix
+import numpy as np
+def build_did_design_matrix(treatment_indicator, post_indicator):
+    # TODO: return an (n, 4) matrix with columns [intercept, treatment, post, treatment*post].
+    
+    n = len(treatment_indicator)
+    ans_matrix = [[1, 1, 1, 1] for i in range(n)]
+    for i in range(n):
+        ans_matrix[i][1] = treatment_indicator[i]
+        ans_matrix[i][2] = post_indicator[i]
+        ans_matrix[i][3] = treatment_indicator[i] * post_indicator[i]
+
+    return np.array(ans_matrix, dtype=float)
 
 # Step 18 - ols_normal_equations (not yet solved)
 # TODO: implement
