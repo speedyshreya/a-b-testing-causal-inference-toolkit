@@ -210,8 +210,13 @@ def benjamini_hochberg_correction(p_values, alpha):
 
     return ans
 
-# Step 15 - group_mean_change (not yet solved)
-# TODO: implement
+# Step 15 - group_mean_change
+def group_mean_change(pre_outcomes, post_outcomes):
+    # TODO: return mean(post_outcomes) - mean(pre_outcomes) as a float
+    avg_pre_outcomes = sum(pre_outcomes)/len(pre_outcomes)
+    avg_post_outcomes = sum(post_outcomes)/len(post_outcomes)
+
+    return avg_post_outcomes - avg_pre_outcomes
 
 # Step 16 - difference_in_differences_simple (not yet solved)
 # TODO: implement
