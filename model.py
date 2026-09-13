@@ -240,8 +240,18 @@ def build_did_design_matrix(treatment_indicator, post_indicator):
 
     return np.array(ans_matrix, dtype=float)
 
-# Step 18 - ols_normal_equations (not yet solved)
-# TODO: implement
+# Step 18 - ols_normal_equations
+def ols_normal_equations(design_matrix, outcomes):
+    # beta_matrix = outcomes/ design_matrix essentially
+
+    design_matrix_np = np.array(design_matrix)
+    outcomes_np = np.array(outcomes)
+
+    design_matrix_np_t = np.transpose(design_matrix_np)
+    dot_prod = np.dot(design_matrix_np_t, design_matrix_np)   # Xᵀ · X, gives 4×4
+    dot_prod_inv = np.linalg.inv(dot_prod)
+
+    return dot_prod_inv @ design_matrix_np_t @ outcomes_np
 
 # Step 19 - did_effect_from_regression (not yet solved)
 # TODO: implement

@@ -27,7 +27,7 @@ python scaffold.py
 - [x] **15.** group_mean_change
 - [x] **16.** difference_in_differences_simple
 - [x] **17.** build_did_design_matrix
-- [ ] **18.** ols_normal_equations
+- [x] **18.** ols_normal_equations
 - [ ] **19.** did_effect_from_regression
 - [ ] **20.** fit_synthetic_control_weights
 - [ ] **21.** synthetic_control_effect
