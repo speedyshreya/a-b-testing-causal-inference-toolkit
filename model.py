@@ -218,8 +218,13 @@ def group_mean_change(pre_outcomes, post_outcomes):
 
     return avg_post_outcomes - avg_pre_outcomes
 
-# Step 16 - difference_in_differences_simple (not yet solved)
-# TODO: implement
+# Step 16 - difference_in_differences_simple
+def difference_in_differences_simple(treated_pre, treated_post, control_pre, control_post):
+    
+    change_treated = group_mean_change(treated_pre, treated_post)
+    change_controlled = group_mean_change(control_pre, control_post)
+
+    return change_treated - change_controlled
 
 # Step 17 - build_did_design_matrix (not yet solved)
 # TODO: implement
