@@ -253,15 +253,9 @@ def ols_normal_equations(design_matrix, outcomes):
 
     return dot_prod_inv @ design_matrix_np_t @ outcomes_np
 
-# Step 19 - did_effect_from_regression (not yet solved)
-# TODO: implement
-
-# Step 20 - fit_synthetic_control_weights (not yet solved)
-# TODO: implement
-
-# Step 21 - synthetic_control_effect (not yet solved)
-# TODO: implement
-
-# Step 22 - ship_decision (not yet solved)
-# TODO: implement
+# Step 19 - did_effect_from_regression
+def did_effect_from_regression(treatment_indicator, post_indicator, outcomes):
+    X = build_did_design_matrix(treatment_indicator, post_indicator)
+    beta = ols_normal_equations(X, outcomes)
+    return float(beta[3])
 
