@@ -259,3 +259,30 @@ def did_effect_from_regression(treatment_indicator, post_indicator, outcomes):
     beta = ols_normal_equations(X, outcomes)
     return float(beta[3])
 
+# Step 20 - fit_synthetic_control_weights
+import numpy as np
+def fit_synthetic_control_weights(treated_pre, donor_pre, num_iterations=5000, learning_rate=0.01):
+    
+    treated_pre = np.asarray(treated_pre, dtype=float) # shape (t_pre,)         one value per TIME
+    donor_pre = np.asarray(donor_pre, dtype=float) # shape (t_pre, n_donors) TIME rows × DONOR cols
+    n_donors = donor_pre.shape[1]
+
+    w = np.ones(n_donors) / n_donors   # shape (n_donors,)      one weight per DONOR
+
+
+    for _ in range(num_iterations):
+        blend = donor_pre @ w   # shape (t_pre,)   one blended value per TIME
+
+        residual = treated_pre - blend # shape (t_pre,)   one miss per TIME
+        gradient = -2 * donor_pre.T @ residual # shape (n_donors,) one number per DONOR
+
+        w = w - learning_rate * gradient
+        
+        w = np.clip(w, 0, None)
+        s = w.sum()
+
+        if s > 0:
+            w = w/s
+
+    return w
+
