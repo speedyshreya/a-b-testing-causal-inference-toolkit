@@ -261,28 +261,46 @@ def did_effect_from_regression(treatment_indicator, post_indicator, outcomes):
 
 # Step 20 - fit_synthetic_control_weights
 import numpy as np
+from scipy.optimize import minimize
+
 def fit_synthetic_control_weights(treated_pre, donor_pre, num_iterations=5000, learning_rate=0.01):
-    
-    treated_pre = np.asarray(treated_pre, dtype=float) # shape (t_pre,)         one value per TIME
-    donor_pre = np.asarray(donor_pre, dtype=float) # shape (t_pre, n_donors) TIME rows × DONOR cols
+    treated_pre = np.asarray(treated_pre, dtype=float)
+    donor_pre   = np.asarray(donor_pre, dtype=float)
     n_donors = donor_pre.shape[1]
 
-    w = np.ones(n_donors) / n_donors   # shape (n_donors,)      one weight per DONOR
+    def objective(w):
+        r = treated_pre - donor_pre @ w
+        return r @ r                      # sum of squared errors
+
+    w0 = np.ones(n_donors) / n_donors
+    bounds = [(0.0, 1.0)] * n_donors                          # w >= 0
+    constraints = {'type': 'eq', 'fun': lambda w: w.sum() - 1}  # sum(w) = 1
+
+    result = minimize(objective, w0, method='SLSQP',
+                      bounds=bounds, constraints=constraints)
+    return result.x
+
+# Step 21 - synthetic_control_effect
+def synthetic_control_effect(treated_post, donor_post, weights):
+
+    # treated_post, donor_post and fitted weights that fit the donor close
+
+    #synthetic counterfactual, per-period gap? that means treated_post[i] - donor_post[i]@ w?
+
+    treated_post = np.asarray(treated_post, dtype=float)
+    donor_post = np.asarray(donor_post, dtype=float)
+    weights = np.asarray(weights, dtype=float)
 
 
-    for _ in range(num_iterations):
-        blend = donor_pre @ w   # shape (t_pre,)   one blended value per TIME
+    synthetic = donor_post @ weights 
 
-        residual = treated_pre - blend # shape (t_pre,)   one miss per TIME
-        gradient = -2 * donor_pre.T @ residual # shape (n_donors,) one number per DONOR
+    gap = treated_post - synthetic
 
-        w = w - learning_rate * gradient
-        
-        w = np.clip(w, 0, None)
-        s = w.sum()
+    average_effect = float(gap.mean())
 
-        if s > 0:
-            w = w/s
-
-    return w
+    return {
+        'synthetic': synthetic, 
+        'gap' : gap,
+        'average_effect': average_effect
+    }
 
